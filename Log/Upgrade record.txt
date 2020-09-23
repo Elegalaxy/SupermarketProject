@@ -1,2 +1,5 @@
 UPGRADE RECORD
 
+22/9/2020
+- Make sure our final topic and scope
+- Made a menu for game
