@@ -1,2 +1,5 @@
 TEST FAIL CASES
 
+22/9/2020
+- Menu
+	- Resize menu border and position
