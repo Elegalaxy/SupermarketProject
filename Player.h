@@ -19,28 +19,28 @@ class Player{
 		}
 		
 		void mvUp(){
-			mvwaddch(curwin, yLoc, xLoc, ' ');
+			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			yLoc--;
 			if(yLoc < 1)
 				yLoc = 1;
 		}
 		
 		void mvDown(){
-			mvwaddch(curwin, yLoc, xLoc, ' ');
+			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			yLoc++;
 			if(yLoc > yMax-2)
 				yLoc = yMax-2;
 		}
 		
 		void mvLeft(){
-			mvwaddch(curwin, yLoc, xLoc, ' ');
+			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			xLoc--;
 			if(xLoc < 1)
 				xLoc = 1;
 		}
 		
 		void mvRight(){
-			mvwaddch(curwin, yLoc, xLoc, ' ');
+			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			xLoc++;
 			if(xLoc > xMax-2)
 				xLoc = xMax-2;
@@ -48,6 +48,7 @@ class Player{
 		
 		int getmv(){
 			int choice = wgetch(curwin);
+			mvwaddch(curwin, yLoc, xLoc, ' ');
 			switch(choice){
 				case KEY_UP:
 					mvUp();
@@ -71,5 +72,6 @@ class Player{
 			mvwaddch(curwin, yLoc, xLoc, character);
 		}
 	
+		~Player();
 };
 #endif

@@ -1,0 +1,16 @@
+SCRIPT DOCUMENTATION
+
+Terminal.h
+	Terminal() - start ncurses and initialise everything
+	~Terminal() - end ncurses
+	int getKey() - get  empty input from user
+	WINDOW *createWin(int y, int x, int startY, int startX) - create a window with size of y, x, and start from startY, startX, return window pointer
+
+Player.h
+	Player(WINDOW* window, int y, int x, char c) - take a window and cordinate (y, x) and a char to represent player
+	int getmv() - take input from user and move the character (arrow keys) or ability, and return the choice (press x to exit game)
+	void display() - display character
+
+Product.h
+	Product(string) - take a string to initialise its name
+	string getName() - return product's name
