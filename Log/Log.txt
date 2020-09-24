@@ -7,3 +7,5 @@ LOG FILE
 24/9/2020
 - Create a respository in Github
 - Make sure how many files and class do we need
+- Create map border and player
+- Create product class

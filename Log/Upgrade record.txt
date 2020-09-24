@@ -3,3 +3,7 @@ UPGRADE RECORD
 22/9/2020
 - Make sure our final topic and scope
 - Made a menu for game
+
+24/9/2020
+- Create map border and player
+- Create product class
