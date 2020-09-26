@@ -20,6 +20,5 @@ class Product{
 		}
 		
 		~Product();
-		
 };
 #endif

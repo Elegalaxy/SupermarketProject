@@ -8,3 +8,7 @@ TEST FAIL CASES
 - Map
 	- Test border size and player movement
 	- Test product's getName function
+	
+25/9/2020
+- Player
+	- tested overload function to add and remove item from player
