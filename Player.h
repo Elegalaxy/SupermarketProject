@@ -1,13 +1,16 @@
 #ifndef Player_H
 #define Player_H
+#include <iostream>
 #include <ncurses.h>
+#include <string>
 
 class Player{
 	private:
 		int xLoc, yLoc, xMax, yMax;
 		char character;
 		WINDOW * curwin;
-	
+		std::string inventory = "";
+		
 	public:
 		Player(WINDOW * win, int y, int x, char c){
 			curwin = win;
@@ -19,28 +22,24 @@ class Player{
 		}
 		
 		void mvUp(){
-			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			yLoc--;
 			if(yLoc < 1)
 				yLoc = 1;
 		}
 		
 		void mvDown(){
-			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			yLoc++;
 			if(yLoc > yMax-2)
 				yLoc = yMax-2;
 		}
 		
 		void mvLeft(){
-			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			xLoc--;
 			if(xLoc < 1)
 				xLoc = 1;
 		}
 		
 		void mvRight(){
-			//mvwaddch(curwin, yLoc, xLoc, ' ');
 			xLoc++;
 			if(xLoc > xMax-2)
 				xLoc = xMax-2;
@@ -62,6 +61,11 @@ class Player{
 				case KEY_RIGHT:
 					mvRight();
 					break;
+				case 10: //Enter
+					addItem("Something");
+					addItem();
+					addItem("Bread");
+					break;
 				default:
 					break;
 			}
@@ -71,6 +75,33 @@ class Player{
 		void display(){
 			mvwaddch(curwin, yLoc, xLoc, character);
 		}
+	
+		void addItem(){
+			inventory = "";
+		}
+		
+		bool addItem(std::string item){
+			if(inventory == "")
+				inventory = item;
+			else
+				return false;
+			
+			return true;
+		}
+		
+		std::string getInventory(){
+			return inventory;
+		}
+		
+		/*bool removeItem(std::string item){
+			for(int i = 0; i < targets.size(); i++){
+				if(targets[i] == item){
+					targets.erase(i);
+					return true;
+				}
+			}
+			return false;
+		}*/
 	
 		~Player();
 };

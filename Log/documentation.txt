@@ -10,6 +10,9 @@ Player.h
 	Player(WINDOW* window, int y, int x, char c) - take a window and cordinate (y, x) and a char to represent player
 	int getmv() - take input from user and move the character (arrow keys) or ability, and return the choice (press x to exit game)
 	void display() - display character
+	void addItem() - remove item from player
+	bool addItem(string item) - add item to player, return true if success
+	string getInventory() - return player current item
 
 Product.h
 	Product(string) - take a string to initialise its name

@@ -7,3 +7,10 @@ UPGRADE RECORD
 24/9/2020
 - Create map border and player
 - Create product class
+
+25/9/2020
+- Player
+	- add a overload function to add and remove item from player
+	- add a fucntion to return player's current item
+- Map
+	- change the size a bit
