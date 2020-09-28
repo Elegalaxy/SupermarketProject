@@ -1,5 +1,4 @@
 #include "Terminal.h"
-#include "Player.h"
 #include <ncurses.h>
 #include <string>
 using namespace std;
