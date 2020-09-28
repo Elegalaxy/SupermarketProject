@@ -15,18 +15,18 @@ int main(){
 		
 	int y, x, yMax, xMax;
 	getmaxyx(stdscr, yMax, xMax);//30 120
-	//cout << yMax << " " << xMax;
-	WINDOW * map = terminal.createWin(yMax, xMax-1, 0, 1);
-	bool game = true;
+	y = (yMax-30)/2;
+	x = (xMax-118)/2;
+	//cout << yMax << " " << xMax << " " << y << " " << x;
 	
-	Player * p = new Player(map, yMax-6, 4, '@');
+	WINDOW * map = terminal.createWin(30, 120, y, x);
+	
+	Player * p = new Player(map, 2/*y+22*/, 2/*4*/, '@');
 	do {
 		p->display();
 		wrefresh(map);
 	}while(p->getmv() != 'x');
 	
-	
-	
-	terminal.getKey();
+	//terminal.getKey();
 	return 0;
 }

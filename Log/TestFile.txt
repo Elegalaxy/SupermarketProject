@@ -11,4 +11,12 @@ TEST FAIL CASES
 	
 25/9/2020
 - Player
-	- tested overload function to add and remove item from player
+	- Tested overload function to add and remove item from player
+	
+27/9/2020
+- Player
+	- Tested obstacle restriction with map border
+	
+28/9/2020
+- Map
+	- Tested rack obstacle function

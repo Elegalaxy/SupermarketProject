@@ -1,6 +1,7 @@
 #ifndef Player_H
 #define Player_H
 #include <iostream>
+#include "Draw.h"
 #include <ncurses.h>
 #include <string>
 
@@ -22,27 +23,23 @@ class Player{
 		}
 		
 		void mvUp(){
-			yLoc--;
-			if(yLoc < 1)
-				yLoc = 1;
+			if(mvwinch(curwin, yLoc-1, xLoc) == 32)
+				yLoc--;
 		}
 		
 		void mvDown(){
-			yLoc++;
-			if(yLoc > yMax-2)
-				yLoc = yMax-2;
+			if(mvwinch(curwin, yLoc + 1, xLoc) == 32)
+				yLoc++;
 		}
 		
 		void mvLeft(){
-			xLoc--;
-			if(xLoc < 1)
-				xLoc = 1;
+			if(mvwinch(curwin, yLoc, xLoc - 1) == 32)
+				xLoc--;
 		}
 		
 		void mvRight(){
-			xLoc++;
-			if(xLoc > xMax-2)
-				xLoc = xMax-2;
+			if(mvwinch(curwin, yLoc, xLoc + 1) == 32)
+				xLoc++;
 		}
 		
 		int getmv(){
@@ -62,9 +59,7 @@ class Player{
 					mvRight();
 					break;
 				case 10: //Enter
-					addItem("Something");
-					addItem();
-					addItem("Bread");
+					drawBox(curwin,5,5,2,2);
 					break;
 				default:
 					break;
@@ -91,6 +86,12 @@ class Player{
 		
 		std::string getInventory(){
 			return inventory;
+		}
+		
+		int getPos(char p){
+			if(p == 'y') return yLoc;
+			else if(p == 'x') return xLoc;
+			else return 0;
 		}
 		
 		/*bool removeItem(std::string item){

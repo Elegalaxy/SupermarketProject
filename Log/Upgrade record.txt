@@ -10,7 +10,17 @@ UPGRADE RECORD
 
 25/9/2020
 - Player
-	- add a overload function to add and remove item from player
-	- add a fucntion to return player's current item
+	- Add a overload function to add and remove item from player
+	- Add a fucntion to return player's current item
 - Map
-	- change the size a bit
+	- Change the size a bit
+	
+27/9/2020
+- Map
+	- Change the size to become a 30 x 120 window
+- Player
+	- It cannot move if the direction have obstacle
+	
+28/9/2020
+- Map
+	- Added rack into map

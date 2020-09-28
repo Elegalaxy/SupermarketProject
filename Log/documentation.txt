@@ -13,7 +13,11 @@ Player.h
 	void addItem() - remove item from player
 	bool addItem(string item) - add item to player, return true if success
 	string getInventory() - return player current item
+	int getPos(char p) - return y location if p is 'y', return x location if p is 'x'
 
 Product.h
 	Product(string) - take a string to initialise its name
 	string getName() - return product's name
+
+Draw.h
+	void drowBox(WINDOW * win, int y, int x, int yStart, int xStart) - draw a box(rack) of a size of y, x, start from yStart, xStart, on win
