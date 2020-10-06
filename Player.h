@@ -59,7 +59,7 @@ class Player{
 					mvRight();
 					break;
 				case 10: //Enter
-					drawBox(curwin,5,5,2,2);
+					//drawBox(curwin,5,5,2,2);
 					break;
 				default:
 					break;
