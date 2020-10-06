@@ -26,3 +26,7 @@ LOG FILE
 28/9/2020
 - Map
 	- Added rack into map
+	
+6/10/2020
+- Draw
+	- Fix starting point bugs
