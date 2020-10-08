@@ -14,10 +14,21 @@ Player.h
 	bool addItem(string item) - add item to player, return true if success
 	string getInventory() - return player current item
 	int getPos(char p) - return y location if p is 'y', return x location if p is 'x'
+	Product checkBlock(int y, int x) - check if there is a interactable block and return the details of it
+	Product getBlockDetail(int y, int x) - get block detail from y, x
 
 Product.h
 	Product(string) - take a string to initialise its name
 	string getName() - return product's name
+	
+Rack.h
+	Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart) - basically the drawBox function, but it could store data for every racks
+	int getID() - return id of this rack
+	void setRack() - set the rack with products
+	int getLocation(char p) - return the location base on the p is 'x' or 'y'
+	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
 
-Draw.h
-	void drowBox(WINDOW * win, int y, int x, int yStart, int xStart) - draw a box(rack) of a size of y, x, start from yStart, xStart, on win
+Block.h
+	Block(string n) -  initialize with block name
+	void drawBox(WINDOW * win, int y, int x, int yStart, int xStart, char c) - create a box base on the start point and size, surround with border of c
+	string getName() - return block name

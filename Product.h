@@ -7,18 +7,9 @@ class Product{
 		std::string name;
 	
 	public:
-		Product(){
-			name = "";
-		}
-		
-		Product(std::string n){
-			name = n;
-		}
-		
-		std::string getName(){
-			return name;
-		}
-		
+		Product();
+		Product(std::string n); //initialize name
+		std::string getName(); //return name
 		~Product();
 };
 #endif

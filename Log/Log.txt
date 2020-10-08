@@ -30,3 +30,16 @@ LOG FILE
 6/10/2020
 - Draw
 	- Fix starting point bugs
+	
+8/10/2020
+- Map
+	- Finish rack arrangement
+- Header
+	- Added more detail comment in header file
+- Player
+	- Added a function to get closest rack info
+- Block
+	- Create this class as a parent class
+	- Move Draw function into this class and redefine it
+- Rack
+	- Modify Draw function so it can be Polymorphy Draw function
