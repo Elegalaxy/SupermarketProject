@@ -7,11 +7,16 @@ using namespace std;
 
 int Rack::rackID = 1;
 
-Rack::Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart): Block(name){//, vector<Product> p){
+Rack::Rack(): Block(name){
+	currentID = 0;
+	name = "";
+}
+
+Rack::Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> p): Block(name){
 	currentID = rackID;
 	rackID++;
 	name = "Rack";
-	//items = p;
+	items = p;
 	y = yy;
 	x = xx;
 	yStart = yyStart;
@@ -58,6 +63,10 @@ void Rack::drawBox(WINDOW * win, int y, int x, int yStart, int xStart){
 			}
 		}
 	}
+}
+
+Product Rack::getProductByY(int y){
+	return items[y];
 }
 
 Rack::~Rack(){

@@ -14,12 +14,14 @@ class Rack: public Block{
 	
 	public:
 		static int rackID; //rack IDs
-		Rack(WINDOW *win, int yy, int xx, int yyStart, int xxStart);//, Product p); //initialize
+		Rack();
+		Rack(WINDOW *win, int yy, int xx, int yyStart, int xxStart, std::vector<Product> p); //initialize
 		int getID(); //return rack id
 		void setRack(std::vector<Product> vec); //set rack's products
 		int getLocation(char p); //return rack start location
 		int getSize(char s); //return rack size
 		void drawBox(WINDOW * win, int y, int x, int yStart, int xStart);
+		Product getProductByY(int y);
 		~Rack();
 };
 #endif
