@@ -51,3 +51,4 @@ LOG FILE
 12/10/2020
 - Player
 	- Done rack interact system
+	- Bug: checkBlock function
