@@ -27,6 +27,7 @@ int main(){
 	int startX = 8;
 	int startY = 1;
 	vector<vector<Rack>> rackList;
+	vector<Rack> tempRack;
 	
 	//racks1
 	Rack *rack11 = new Rack(map, rackY, rackX, startY, startX);
@@ -37,7 +38,14 @@ int main(){
 	
 	Rack *rack15 = new Rack(map, rackY, rackX, startY, rack14->getLocation('x') + rack14->getSize('x') + startX);
 	Rack *rack16 = new Rack(map, rackY, rackX, startY, rack15->getLocation('x') + rack15->getSize('x'));
-	
+	tempRack.push_back(*rack11);
+	tempRack.push_back(*rack12);
+	tempRack.push_back(*rack13);
+	tempRack.push_back(*rack14);
+	tempRack.push_back(*rack15);
+	tempRack.push_back(*rack16);
+	rackList.push_back(tempRack);
+	tempRack.clear();
 	//Rack *rack17 = new Rack(map, rackY, rackX, startY, rack16->getLocation('x') + rack16->getSize('x') + startX);
 	//Rack *rack18 = new Rack(map, rackY, rackX, startY, rack17->getLocation('x') + rack17->getSize('x'));
 	
@@ -51,7 +59,13 @@ int main(){
 	
 	Rack *rack25 = new Rack(map, rackY, rackX, startY, rack24->getLocation('x') + rack24->getSize('x') + startX);
 	Rack *rack26 = new Rack(map, rackY, rackX, startY, rack25->getLocation('x') + rack25->getSize('x'));
-	
+	tempRack.push_back(*rack21);
+	tempRack.push_back(*rack22);
+	tempRack.push_back(*rack23);
+	tempRack.push_back(*rack24);
+	tempRack.push_back(*rack25);
+	tempRack.push_back(*rack26);
+	rackList.push_back(tempRack);	
 	//Rack *rack27 = new Rack(map, rackY, rackX, startY, rack26->getLocation('x') + rack26->getSize('x') + startX);
 	//Rack *rack28 = new Rack(map, rackY, rackX, startY, rack27->getLocation('x') + rack27->getSize('x'));
 	
@@ -62,7 +76,7 @@ int main(){
 	
 	
 	//player
-	Player * p = new Player(map, y+24, 4, '@');
+	Player * p = new Player(map, y+24, 4, '@', rackList);
 	do {
 		p->display();
 		wrefresh(map);

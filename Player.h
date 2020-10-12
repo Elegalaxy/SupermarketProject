@@ -2,7 +2,9 @@
 #define Player_H
 #include <iostream>
 #include "Product.h"
+#include "Rack.h"
 #include <ncurses.h>
+#include <vector>
 #include <string>
 
 class Player{
@@ -12,9 +14,10 @@ class Player{
 		WINDOW * curwin;
 		std::string inventory = "";
 		void checkBlock();
+		std::vector<std::vector<Rack>> rack;
 		
 	public:
-		Player(WINDOW * win, int y, int x, char c); //initialize
+		Player(WINDOW * win, int y, int x, char c, Rack r); //initialize
 		//movement
 		void mvUp();
 		void mvDown();
@@ -28,8 +31,9 @@ class Player{
 		void addItem(); //remove item
 		bool addItem(std::string item); //add item
 		std::string getInventory(); //return item
-		Product checkBlock(int y, int x);
+		Product checkBlock(int y, int x, char c);
 		Product getBlockDetail(int y, int x);
+		int getRackIDByLoc(int y, int x, vector<vector<Rack>> r);
 
 		~Player();
 };

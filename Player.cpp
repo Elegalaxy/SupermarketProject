@@ -1,18 +1,21 @@
 #include <iostream>
 #include "Player.h"
 #include "Product.h"
+#include "Rack.h"
 #include <ncurses.h>
+#include <vector>
 #include <string>
 using namespace std;
 
 //initialize
-Player::Player(WINDOW * win, int y, int x, char c){
+Player::Player(WINDOW * win, int y, int x, char c, Rack r){
 	curwin = win;
 	yLoc = y;
 	xLoc = x;
 	getmaxyx(curwin, yMax, xMax);
 	keypad(curwin, true);
 	character = c;
+	rack = r;
 }
 
 //movement
@@ -36,18 +39,18 @@ void Player::mvRight(){
 		xLoc++;
 }
 
-Product Player::checkBlock(int y, int x){
+Product Player::checkBlock(int y, int x, char c){
 	char cUp = mvwinch(curwin, y-1, x);
 	char cRight = mvwinch(curwin, y, x+1);
 	char cDown = mvwinch(curwin, y+1, x);
 	char cLeft = mvwinch(curwin, y, x-1);
-	if(cUp != ' ')
+	if(cUp == c)
 		return getBlockDetail(y-1, x);
-	else if(cRight != ' ')
+	else if(cRight == c)
 		return getBlockDetail(y, x+1);
-	else if(cDown != ' ')
+	else if(cDown == c)
 		return getBlockDetail(y+1, x);
-	else if(cLeft != ' ')
+	else if(cLeft == c)
 		return getBlockDetail(y, x-1);
 	else{
 		Product n;
@@ -78,7 +81,8 @@ int Player::getmv(){
 			break;
 		case 10: //Enter
 			//drawBox(curwin,5,5,2,2);
-			cout << checkBlock(yLoc, xLoc).getName();
+			//cout << checkBlock(yLoc, xLoc, '|').getName();
+			cout << getRackIDByLoc(yLoc, xLoc, rack);
 			break;
 		default:
 			break;
@@ -113,6 +117,21 @@ bool Player::addItem(string item){
 string Player::getInventory(){
 	inventory = "";
 	return inventory;
+}
+
+int getRackIDByLoc(int y, int x, vector<vector<Rack>> r){
+	int yStart, xStart, yEnd, xEnd;
+	for(int i = 0; i < r.size(); i++){
+		for(int j = 0; j < r[i].size(); j++){
+			yStart = r[i][j].getLocation('y');
+			xStart = r[i][j].getLocation('x');
+			yEnd = yStart + r[i][j].getSize('y');
+			xEnd = xStart + r[i][j].getSize('x');
+			if(y >= yStart && y <= xStart && x >= xStart && x <= xEnd)
+				cout << r[i][j].getID();
+		}
+	}
+	return 0;
 }
 
 Player::~Player(){
