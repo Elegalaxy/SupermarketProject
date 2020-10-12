@@ -8,7 +8,7 @@
 using namespace std;
 
 //initialize
-Player::Player(WINDOW * win, int y, int x, char c, Rack r){
+Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r){
 	curwin = win;
 	yLoc = y;
 	xLoc = x;
@@ -39,6 +39,54 @@ void Player::mvRight(){
 		xLoc++;
 }
 
+Product Player::getProductByRack(int y, Rack* r){
+	int start, end;
+	start = r->getLocation('y');
+	cout << y-start-1;
+	Product p;
+	return p;//r->getProductByY(y-start-1);
+}
+
+Rack Player::returnRackByID(int ID){
+	for(int i = 0; i < rack.size(); i++){
+		for(int j = 0; j < rack.size(); j++){
+			if(rack[i][j].getID() == ID) return rack[i][j];
+		}
+	}
+	Rack n;
+	return n;
+}
+
+int Player::getRackIDByLoc(int y, int x){
+	int yStart, xStart, yEnd, xEnd;
+	for(int i = 0; i < rack.size(); i++){
+		for(int j = 0; j < rack[i].size(); j+=2){
+			yStart = rack[i][j].getLocation('y');
+			xStart = rack[i][j].getLocation('x');
+			yEnd = yStart + rack[i][j].getSize('y')-1;
+			xEnd = xStart + rack[i][j].getSize('x') + rack[i][j+1].getSize('x');
+			if(y >= yStart && y <= xStart && x >= xStart && x <= xEnd)
+				return rack[i][j].getID();
+		}
+	}
+	return 0;
+}
+
+
+Product Player::getBlockDetail(int y, int x){
+	int current;
+	Rack curRack;
+	Product n;
+	current = getRackIDByLoc(y, x);
+	
+	if(!current) return n;
+	else{
+		curRack = returnRackByID(current);
+		return n;//getProductByRack(y, &curRack);
+	}
+}
+
+
 Product Player::checkBlock(int y, int x, char c){
 	char cUp = mvwinch(curwin, y-1, x);
 	char cRight = mvwinch(curwin, y, x+1);
@@ -56,11 +104,6 @@ Product Player::checkBlock(int y, int x, char c){
 		Product n;
 		return n;
 	}
-}
-
-Product Player::getBlockDetail(int y, int x){
-	Product n;
-	return n;
 }
 
 int Player::getmv(){
@@ -81,8 +124,7 @@ int Player::getmv(){
 			break;
 		case 10: //Enter
 			//drawBox(curwin,5,5,2,2);
-			//cout << checkBlock(yLoc, xLoc, '|').getName();
-			cout << getRackIDByLoc(yLoc, xLoc, rack);
+			cout << checkBlock(yLoc, xLoc, '|').getName();
 			break;
 		default:
 			break;
@@ -117,21 +159,6 @@ bool Player::addItem(string item){
 string Player::getInventory(){
 	inventory = "";
 	return inventory;
-}
-
-int getRackIDByLoc(int y, int x, vector<vector<Rack>> r){
-	int yStart, xStart, yEnd, xEnd;
-	for(int i = 0; i < r.size(); i++){
-		for(int j = 0; j < r[i].size(); j++){
-			yStart = r[i][j].getLocation('y');
-			xStart = r[i][j].getLocation('x');
-			yEnd = yStart + r[i][j].getSize('y');
-			xEnd = xStart + r[i][j].getSize('x');
-			if(y >= yStart && y <= xStart && x >= xStart && x <= xEnd)
-				cout << r[i][j].getID();
-		}
-	}
-	return 0;
 }
 
 Player::~Player(){

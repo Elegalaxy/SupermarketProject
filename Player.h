@@ -17,7 +17,7 @@ class Player{
 		std::vector<std::vector<Rack>> rack;
 		
 	public:
-		Player(WINDOW * win, int y, int x, char c, Rack r); //initialize
+		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r); //initialize
 		//movement
 		void mvUp();
 		void mvDown();
@@ -33,7 +33,9 @@ class Player{
 		std::string getInventory(); //return item
 		Product checkBlock(int y, int x, char c);
 		Product getBlockDetail(int y, int x);
-		int getRackIDByLoc(int y, int x, vector<vector<Rack>> r);
+		int getRackIDByLoc(int y, int x);
+		Product getProductByRack(int y, Rack* r);
+		Rack returnRackByID(int ID);
 
 		~Player();
 };

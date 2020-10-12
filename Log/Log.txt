@@ -43,3 +43,12 @@ LOG FILE
 	- Move Draw function into this class and redefine it
 - Rack
 	- Modify Draw function so it can be Polymorphy Draw function
+	
+9/10/2020
+- Player
+	- Made a function to check if there is a rack around when press enter
+	
+12/10/2020
+- Player
+	- Done rack interact system
+	- Bug: checkBlock function

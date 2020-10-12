@@ -16,18 +16,22 @@ Player.h
 	int getPos(char p) - return y location if p is 'y', return x location if p is 'x'
 	Product checkBlock(int y, int x) - check if there is a interactable block and return the details of it
 	Product getBlockDetail(int y, int x) - get block detail from y, x
+	int getRackIDByLoc(int y, int x) - return found rack id from the y and x of user interact
+	Product getProductByRack(int y, Rack r) - return the product from rack base on the y user interact
+	Rack returnRackByID(int ID) - return the rack by ID
 
 Product.h
 	Product(string) - take a string to initialise its name
 	string getName() - return product's name
 	
 Rack.h
-	Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart) - basically the drawBox function, but it could store data for every racks
+	Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> p): Block(name) - basically the drawBox function, but it could store data for every racks
 	int getID() - return id of this rack
 	void setRack() - set the rack with products
 	int getLocation(char p) - return the location base on the p is 'x' or 'y'
 	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
-
+	Product getProductByY(int y) - return product base on index
+	
 Block.h
 	Block(string n) -  initialize with block name
 	void drawBox(WINDOW * win, int y, int x, int yStart, int xStart, char c) - create a box base on the start point and size, surround with border of c
