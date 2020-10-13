@@ -17,15 +17,13 @@ int main(){
 	}
 	
 	//define window
-	int y, x, yMax, xMax;
-	getmaxyx(stdscr, yMax, xMax);//30 120
-	y = (yMax-30)/2;
-	x = (xMax-118)/2;
-	WINDOW * map = terminal.createWin(30, 120, y, x);
+	int yMax = 30, xMax = 120;
+	//getmaxyx(stdscr, yMax, xMax);//30 120
+	WINDOW * map = terminal.createWin(yMax-2, xMax-2, 1, 1);
 
 	//define racks size and start point
-	int rackY = 10;
-	const int rackX = 10;
+	const int rackY = 10;
+	const int rackX = 12;
 	int startX = 8;
 	int startY = 1;
 	vector<vector<Rack>> rackList;
@@ -96,7 +94,7 @@ int main(){
 	
 	
 	//player
-	Player * p = new Player(map, y+24, 4, '@', rackList);
+	Player * p = new Player(map, yMax-6, 4, '@', rackList);
 	do {
 		p->display();
 		wrefresh(map);

@@ -47,7 +47,7 @@ Product Player::getProductByRack(int y, Rack* r){
 
 Rack Player::returnRackByID(int ID){
 	for(int i = 0; i < rack.size(); i++){
-		for(int j = 0; j < rack.size(); j++){
+		for(int j = 0; j < rack[i].size(); j++){
 			if(rack[i][j].getID() == ID) return rack[i][j];
 		}
 	}
@@ -119,7 +119,7 @@ int Player::getmv(){
 			break;
 		case 10: //Enter
 			addItem(checkBlock(yLoc, xLoc, '|').getName());
-			mvwprintw(curwin, 27, 3, inventory.c_str());
+			
 			break;
 		default:
 			break;
@@ -145,10 +145,16 @@ void Player::addItem(){
 bool Player::addItem(string item){
 	if(inventory == ""){
 		inventory = item;
+		mvwprintw(curwin, yMax-4, xMax-11, "%s", "          ");
+		wrefresh(curwin);
+		mvwprintw(curwin, yMax-4, xMax-11, inventory.c_str());
 		return true;
 	}
 	else{
-		mvwprintw(curwin, 28, 3, "%s", "FULL");
+		mvwprintw(curwin, yMax-4, xMax-11, "%s", "          ");
+		wrefresh(curwin);
+		mvwprintw(curwin, yMax-4, xMax-11, "%s", "FULL");
+		//wrefresh(curwin);
 		return false;
 	}
 }

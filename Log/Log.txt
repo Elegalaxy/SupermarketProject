@@ -56,3 +56,6 @@ LOG FILE
 13/10/2020
 - Player
 	- Fix checkBlock Bug
+	- Rack interaction is fully function
+- Map
+	- Modified some map size
