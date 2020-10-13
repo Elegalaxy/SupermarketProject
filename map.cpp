@@ -33,21 +33,21 @@ int main(){
 	
 	//products
 	vector<Product> products;
-	Product p1("a");
+	Product p1("Coke");
 	products.push_back(p1);
-	Product p2("b");
+	Product p2("Vegetable");
 	products.push_back(p2);
-	Product p3("c");
+	Product p3("Bear");
 	products.push_back(p3);
-	Product p4("d");
+	Product p4("Beef");
 	products.push_back(p4);
-	Product p5("e");
+	Product p5("Monster");
 	products.push_back(p5);
-	Product p6("f");
+	Product p6("Cake");
 	products.push_back(p6);
-	Product p7("g");
+	Product p7("Chicken");
 	products.push_back(p7);
-	Product p8("h");
+	Product p8("Cookie");
 	products.push_back(p8);
 	
 	//racks1
@@ -101,6 +101,5 @@ int main(){
 		p->display();
 		wrefresh(map);
 	}while(p->getmv() != 'x');
-	
 	return 0;
 }

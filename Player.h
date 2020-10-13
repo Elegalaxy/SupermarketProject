@@ -31,6 +31,7 @@ class Player{
 		void addItem(); //remove item
 		bool addItem(std::string item); //add item
 		std::string getInventory(); //return item
+		
 		Product checkBlock(int y, int x, char c);
 		Product getBlockDetail(int y, int x);
 		int getRackIDByLoc(int y, int x);
