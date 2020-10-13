@@ -40,11 +40,9 @@ void Player::mvRight(){
 }
 
 Product Player::getProductByRack(int y, Rack* r){
-	int start, end;
+	int start;
 	start = r->getLocation('y');
-	cout << y-start-1;
-	Product p;
-	return p;//r->getProductByY(y-start-1);
+	return r->getProductByY(y-start-1);
 }
 
 Rack Player::returnRackByID(int ID){
@@ -65,8 +63,7 @@ int Player::getRackIDByLoc(int y, int x){
 			xStart = rack[i][j].getLocation('x');
 			yEnd = yStart + rack[i][j].getSize('y')-1;
 			xEnd = xStart + rack[i][j].getSize('x') + rack[i][j+1].getSize('x');
-			if(y >= yStart && y <= xStart && x >= xStart && x <= xEnd)
-				return rack[i][j].getID();
+			if(y >= yStart && y <= yEnd && x >= xStart && x <= xEnd) return rack[i][j].getID();
 		}
 	}
 	return 0;
@@ -74,16 +71,14 @@ int Player::getRackIDByLoc(int y, int x){
 
 
 Product Player::getBlockDetail(int y, int x){
-	int current;
-	Rack curRack;
+	int current = getRackIDByLoc(y, x);
 	Product n;
-	current = getRackIDByLoc(y, x);
-	
 	if(!current) return n;
 	else{
-		curRack = returnRackByID(current);
-		return n;//getProductByRack(y, &curRack);
+		Rack curRack = returnRackByID(current);
+		return getProductByRack(y, &curRack);
 	}
+	return n;
 }
 
 
@@ -123,8 +118,8 @@ int Player::getmv(){
 			mvRight();
 			break;
 		case 10: //Enter
-			//drawBox(curwin,5,5,2,2);
-			cout << checkBlock(yLoc, xLoc, '|').getName();
+			addItem(checkBlock(yLoc, xLoc, '|').getName());
+			mvwprintw(curwin, 27, 3, inventory.c_str());
 			break;
 		default:
 			break;
@@ -148,16 +143,17 @@ void Player::addItem(){
 }
 
 bool Player::addItem(string item){
-	if(inventory == "")
+	if(inventory == ""){
 		inventory = item;
-	else
+		return true;
+	}
+	else{
+		mvwprintw(curwin, 28, 3, "%s", "FULL");
 		return false;
-	
-	return true;
+	}
 }
 
 string Player::getInventory(){
-	inventory = "";
 	return inventory;
 }
 

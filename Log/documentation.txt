@@ -25,13 +25,16 @@ Product.h
 	string getName() - return product's name
 	
 Rack.h
+	Rack() - null rack
 	Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> p): Block(name) - basically the drawBox function, but it could store data for every racks
 	int getID() - return id of this rack
 	void setRack() - set the rack with products
 	int getLocation(char p) - return the location base on the p is 'x' or 'y'
 	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
+	void drawBox(int y, int x, int yStart, int xStart) - drawBox base on size and starting point
 	Product getProductByY(int y) - return product base on index
-	
+	void showProduct() - show products on rack
+			
 Block.h
 	Block(string n) -  initialize with block name
 	void drawBox(WINDOW * win, int y, int x, int yStart, int xStart, char c) - create a box base on the start point and size, surround with border of c

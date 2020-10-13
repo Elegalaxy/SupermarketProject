@@ -29,7 +29,7 @@ LOG FILE
 	
 6/10/2020
 - Draw
-	- Fix starting point bugs
+	- Fix starting gitpoint bugs
 	
 8/10/2020
 - Map
@@ -52,3 +52,7 @@ LOG FILE
 - Player
 	- Done rack interact system
 	- Bug: checkBlock function
+	
+13/10/2020
+- Player
+	- Fix checkBlock Bug
