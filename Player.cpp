@@ -70,17 +70,19 @@ int Player::getRackIDByLoc(int y, int x){
 }
 
 
-Product Player::getBlockDetail(int y, int x){
+Product Player::trigger(int y, int x){
 	int current = getRackIDByLoc(y, x);
-	Product n;
-	if(!current) return n;
-	else{
+
+	if(!current){
+		inventory = "";
+		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
+		wrefresh(curwin);
+	}else{
 		Rack curRack = returnRackByID(current);
 		return getProductByRack(y, &curRack);
 	}
 	return n;
 }
-
 
 Product Player::checkBlock(int y, int x, char c){
 	char cUp = mvwinch(curwin, y-1, x);
@@ -88,15 +90,14 @@ Product Player::checkBlock(int y, int x, char c){
 	char cDown = mvwinch(curwin, y+1, x);
 	char cLeft = mvwinch(curwin, y, x-1);
 	if(cUp == c)
-		return getBlockDetail(y-1, x);
+		return trigger(y-1, x);
 	else if(cRight == c)
-		return getBlockDetail(y, x+1);
+		return trigger(y, x+1);
 	else if(cDown == c)
-		return getBlockDetail(y+1, x);
+		return trigger(y+1, x);
 	else if(cLeft == c)
-		return getBlockDetail(y, x-1);
+		return trigger(y, x-1);
 	else{
-		Product n;
 		return n;
 	}
 }
@@ -121,6 +122,7 @@ int Player::getmv(){
 		case 10: //Enter
 			n = checkBlock(yLoc, xLoc, '|').getName();
 			if(n != "") addItem(n);
+			checkBlock(yLoc, xLoc, '-').getName();
 			break;
 		default:
 			break;
@@ -139,22 +141,18 @@ int Player::getPos(char p){
 }
 
 //inventory
-void Player::addItem(){
-	inventory = "";
-}
-
 bool Player::addItem(string item){
 	if(inventory == ""){
 		inventory = item;
-		mvwprintw(curwin, yMax-4, xMax-11, "%s", "          ");
+		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
 		wrefresh(curwin);
-		mvwprintw(curwin, yMax-4, xMax-11, inventory.c_str());
+		mvwprintw(curwin, yMax-6, xMax-11, inventory.c_str());
 		return true;
 	}
 	else{
-		mvwprintw(curwin, yMax-4, xMax-11, "%s", "          ");
+		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
 		wrefresh(curwin);
-		mvwprintw(curwin, yMax-4, xMax-11, "%s", "FULL");
+		mvwprintw(curwin, yMax-6, xMax-11, "%s", "FULL");
 		//wrefresh(curwin);
 		return false;
 	}

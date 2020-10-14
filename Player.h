@@ -15,6 +15,7 @@ class Player{
 		std::string inventory = "";
 		void checkBlock();
 		std::vector<std::vector<Rack>> rack;
+		Product n;
 		
 	public:
 		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r); //initialize
@@ -33,7 +34,7 @@ class Player{
 		std::string getInventory(); //return item
 		
 		Product checkBlock(int y, int x, char c);
-		Product getBlockDetail(int y, int x);
+		Product trigger(int y, int x);
 		int getRackIDByLoc(int y, int x);
 		Product getProductByRack(int y, Rack* r);
 		Rack returnRackByID(int ID);

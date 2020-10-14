@@ -10,7 +10,6 @@ Player.h
 	Player(WINDOW* window, int y, int x, char c) - take a window and cordinate (y, x) and a char to represent player
 	int getmv() - take input from user and move the character (arrow keys) or ability, and return the choice (press x to exit game)
 	void display() - display character
-	void addItem() - remove item from player
 	bool addItem(string item) - add item to player, return true if success
 	string getInventory() - return player current item
 	int getPos(char p) - return y location if p is 'y', return x location if p is 'x'
@@ -31,11 +30,15 @@ Rack.h
 	void setRack() - set the rack with products
 	int getLocation(char p) - return the location base on the p is 'x' or 'y'
 	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
-	void drawBox(int y, int x, int yStart, int xStart) - drawBox base on size and starting point
 	Product getProductByY(int y) - return product base on index
 	void showProduct() - show products on rack
 			
 Block.h
 	Block(string n) -  initialize with block name
+	Block(std::string n, WINDOW* win, int yy, int xx, int yyStart, int xxStart) - initialize
 	void drawBox(WINDOW * win, int y, int x, int yStart, int xStart, char c) - create a box base on the start point and size, surround with border of c
 	string getName() - return block name
+	
+Bin.h
+	Bin() - null bin
+	Bin(WINDOW * win, int yy, int xx, int yyStart, int xxStart, char hor, char ver) - initialize
