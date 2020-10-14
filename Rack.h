@@ -12,7 +12,7 @@ class Rack: public Block{
 		int currentID;
 		std::vector<Product> items;
 		int y, x, yStart, xStart;
-	
+		
 	public:
 		static int rackID; //rack IDs
 		Rack();

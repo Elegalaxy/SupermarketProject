@@ -13,6 +13,7 @@ void Terminal::start(){
 	//raw(); //take all input as input
 	noecho(); //what user type dont show up
 	keypad(stdscr, true);
+	curs_set(0);
 }
 
 void Terminal::end(){
