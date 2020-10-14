@@ -1,8 +1,9 @@
 #include "Terminal.h"
 #include "Player.h"
 #include "Rack.h"
-#include <ncurses.h>
 #include "Product.h"
+#include "Bin.h"
+#include <ncurses.h>
 #include <string>
 #include <vector>
 using namespace std;
@@ -91,7 +92,7 @@ int main(){
 	
 	
 	//recycle bin
-	
+	Bin *bin = new Bin(map, 3, 5, yMax-6, xMax-10);
 	
 	//player
 	Player * p = new Player(map, yMax-6, 4, '@', rackList);

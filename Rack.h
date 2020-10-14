@@ -8,10 +8,8 @@
 
 class Rack: public Block{
 	private:
-		WINDOW *curWin;
 		int currentID;
 		std::vector<Product> items;
-		int y, x, yStart, xStart;
 		
 	public:
 		static int rackID; //rack IDs
@@ -21,7 +19,6 @@ class Rack: public Block{
 		void setRack(std::vector<Product> vec); //set rack's products
 		int getLocation(char p); //return rack start location
 		int getSize(char s); //return rack size
-		void drawBox(int y, int x, int yStart, int xStart);
 		Product getProductByY(int y);
 		void showProduct();
 		~Rack();

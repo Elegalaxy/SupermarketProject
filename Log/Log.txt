@@ -63,3 +63,9 @@ LOG FILE
 14/10/2020
 - Player
 	- Fix bug of get empty thing and display full while not around any rack
+
+15/10/2020
+- Block
+	- move some repeat code from Rack.h to Block.h for polymorphism
+- Bin
+	- Shows "Bin" and now fully function
