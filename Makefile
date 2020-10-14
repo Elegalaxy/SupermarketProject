@@ -12,3 +12,8 @@ test: Terminal.h Terminal.cpp test.cpp
 	g++ -o test Terminal.h Terminal.cpp test.cpp -lncurses
 	./test
 	clear
+	
+test2: Terminal.h Terminal.cpp Player.h Player.cpp Product.h Product.cpp Block.h Block.cpp Rack.h Rack.cpp test2.cpp
+	g++ -o test Terminal.h Terminal.cpp Player.h Player.cpp Product.h Product.cpp Block.h Block.cpp Rack.h Rack.cpp test2.cpp -lncurses
+	./test
+	clear

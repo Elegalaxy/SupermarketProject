@@ -103,6 +103,7 @@ Product Player::checkBlock(int y, int x, char c){
 
 int Player::getmv(){
 	int choice = wgetch(curwin);
+	string n;
 	mvwaddch(curwin, yLoc, xLoc, ' ');
 	switch(choice){
 		case KEY_UP:
@@ -118,8 +119,8 @@ int Player::getmv(){
 			mvRight();
 			break;
 		case 10: //Enter
-			addItem(checkBlock(yLoc, xLoc, '|').getName());
-			
+			n = checkBlock(yLoc, xLoc, '|').getName();
+			if(n != "") addItem(n);
 			break;
 		default:
 			break;

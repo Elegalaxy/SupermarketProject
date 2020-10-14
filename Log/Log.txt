@@ -59,3 +59,7 @@ LOG FILE
 	- Rack interaction is fully function
 - Map
 	- Modified some map size
+
+14/10/2020
+- Player
+	- Fix bug of get empty thing and display full while not around any rack
