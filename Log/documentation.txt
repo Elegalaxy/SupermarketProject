@@ -28,8 +28,6 @@ Rack.h
 	Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> p): Block(name) - basically the drawBox function, but it could store data for every racks
 	int getID() - return id of this rack
 	void setRack() - set the rack with products
-	int getLocation(char p) - return the location base on the p is 'x' or 'y'
-	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
 	Product getProductByY(int y) - return product base on index
 	void showProduct() - show products on rack
 			
@@ -37,8 +35,18 @@ Block.h
 	Block(string n) -  initialize with block name
 	Block(std::string n, WINDOW* win, int yy, int xx, int yyStart, int xxStart) - initialize
 	void drawBox(WINDOW * win, int y, int x, int yStart, int xStart, char c) - create a box base on the start point and size, surround with border of c
+	int getLocation(char p) - return the location base on the p is 'x' or 'y'
+	int getSize(char s) - return the size of the rack base on the s is 'x' or 'y'
 	string getName() - return block name
 	
 Bin.h
 	Bin() - null bin
 	Bin(WINDOW * win, int yy, int xx, int yyStart, int xxStart, char hor, char ver) - initialize
+
+Counter.h
+	Counter() - null counter
+	Counter(WINDOW * win, int yy, int xx, int yyStart, int xxStart, char hor, char ver) - initialize
+	void drawBox(WINDOW * curWin, int y, int x, int yStart, int xStart, char horr, char verr) - drawBox function
+	bool checkItem(std::string item) - check if item is in the list
+	void addOrder() add a random item into order
+	void removeOrder(std::string) - remove a order according to the item name

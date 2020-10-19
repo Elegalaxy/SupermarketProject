@@ -17,6 +17,8 @@ class Block{
 		
 		//basic block function
 		void drawBox(WINDOW * curWin, int y, int x, int yStart, int xStart, char horr, char verr);
+		int getLocation(char p); //return rack start location
+		int getSize(char s); //return rack size
 		~Block();
 };		
 #endif

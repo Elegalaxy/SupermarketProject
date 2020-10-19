@@ -1,14 +1,20 @@
+//Please note that this is Windows specific code
 #include <iostream>
-#include "Terminal.h"
-#include <ncurses.h>
-#include <string>
+#include <unistd.h>
 using namespace std;
 
-int main(){
-	Terminal terminal;
-	int y,x;
-	getmaxyx(stdscr, y, x);
-	cout << y << " " << x;
-	cin >> y;
-	return 0;
+void Say_Hello(){
+	cout << "Hello" << endl;
+}
+
+int main()
+{
+    for(;;) 
+    {
+
+    Say_Hello();
+    // Sleep for 5*1000ms
+    sleep(500);
+
+    }
 }

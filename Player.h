@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Product.h"
 #include "Rack.h"
+#include "Counter.h"
+#include "Bin.h"
 #include <ncurses.h>
 #include <vector>
 #include <string>
@@ -15,10 +17,13 @@ class Player{
 		std::string inventory = "";
 		void checkBlock();
 		std::vector<std::vector<Rack>> rack;
+		Counter counter;
+		Bin bin;
 		Product n;
+		int score;
 		
 	public:
-		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r); //initialize
+		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r, Counter cc, Bin bb); //initialize
 		//movement
 		void mvUp();
 		void mvDown();
@@ -33,7 +38,7 @@ class Player{
 		bool addItem(std::string item); //add item
 		std::string getInventory(); //return item
 		
-		Product checkBlock(int y, int x, char c);
+		Product checkBlock(int y, int x, char c, char c2);
 		Product trigger(int y, int x);
 		int getRackIDByLoc(int y, int x);
 		Product getProductByRack(int y, Rack* r);

@@ -24,28 +24,6 @@ int Rack::getID(){
 	return currentID;
 }
 
-int Rack::getLocation(char p){
-	switch(p){
-		case 'y':
-			return yStart;
-		case 'x':
-			return xStart;
-		default:
-			return 0;
-	}
-}
-
-int Rack::getSize(char s){
-	switch(s){
-		case 'y':
-			return y;
-		case 'x':
-			return x;
-		default:
-			return 0;
-	}
-}
-
 Product Rack::getProductByY(int y){
 	return items[y];
 }
@@ -54,6 +32,10 @@ void Rack::showProduct(){
 	for(int i = 0; i < items.size(); i++){
 		mvwprintw(curWin, yStart+i+1, xStart+1, items[i].getName().c_str());
 	}
+}
+
+vector<Product> Rack::getProductList(){
+	return items;
 }
 
 Rack::~Rack(){
