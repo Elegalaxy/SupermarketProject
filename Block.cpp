@@ -23,6 +23,28 @@ string Block::getName(){
 	return name;
 }
 
+int Block::getLocation(char p){
+	switch(p){
+		case 'y':
+			return yStart;
+		case 'x':
+			return xStart;
+		default:
+			return 0;
+	}
+}
+
+int Block::getSize(char s){
+	switch(s){
+		case 'y':
+			return y;
+		case 'x':
+			return x;
+		default:
+			return 0;
+	}
+}
+
 void Block::drawBox(WINDOW * curWin, int y, int x, int yStart, int xStart, char horr, char verr){
 	int yEnd = yStart + y;
 	int xEnd = xStart + x;

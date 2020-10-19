@@ -1,11 +1,12 @@
-#include "Terminal.h"
-#include "Player.h"
-#include "Rack.h"
-#include "Product.h"
-#include "Bin.h"
 #include <ncurses.h>
 #include <string>
 #include <vector>
+#include "Terminal.h"
+#include "Player.h"
+#include "Product.h"
+#include "Rack.h"
+#include "Bin.h"
+#include "Counter.h"
 using namespace std;
 
 extern bool menu();
@@ -21,7 +22,6 @@ int main(){
 	int yMax = 30, xMax = 120;
 	//getmaxyx(stdscr, yMax, xMax);//30 120
 	WINDOW * map = terminal.createWin(yMax-2, xMax-2, 1, 1);
-
 	//define racks size and start point
 	const int rackY = 10;
 	const int rackX = 12;
@@ -89,13 +89,13 @@ int main(){
 	tempRack.clear();
 	
 	//counter
-	
+	Counter *counter = new Counter(map, 2, 9, yMax - 5, 1, rackList);
 	
 	//recycle bin
 	Bin *bin = new Bin(map, 3, 5, yMax-6, xMax-10);
 	
 	//player
-	Player * p = new Player(map, yMax-6, 4, '@', rackList);
+	Player * p = new Player(map, yMax-7, 4, '@', rackList, *counter, *bin);
 	do {
 		p->display();
 		wrefresh(map);

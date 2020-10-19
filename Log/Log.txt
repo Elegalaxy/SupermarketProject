@@ -69,3 +69,17 @@ LOG FILE
 	- move some repeat code from Rack.h to Block.h for polymorphism
 - Bin
 	- Shows "Bin" and now fully function
+- Counter
+	- Create counter class
+- Map
+	- Added counter into map
+	
+19/10/2020
+- Counter
+	- Able to check item, add order and remove order
+- Player
+	- Able to compare inventory with order list, add score if item match
+	- Check one more character from counter
+	- Shows score
+- Map
+	- Add score while player put correct item in counter

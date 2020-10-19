@@ -2,13 +2,16 @@
 #include "Player.h"
 #include "Product.h"
 #include "Rack.h"
+#include "Counter.h"
+#include "Bin.h"
 #include <ncurses.h>
 #include <vector>
 #include <string>
+
 using namespace std;
 
 //initialize
-Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r){
+Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r, Counter cc, Bin bb){
 	curwin = win;
 	yLoc = y;
 	xLoc = x;
@@ -16,6 +19,12 @@ Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r){
 	keypad(curwin, true);
 	character = c;
 	rack = r;
+	bin = bb;
+	counter = cc;
+	score = 0;
+	mvwprintw(curwin, 2, 120 -11-4, "%s", "Score:");
+	mvwprintw(curwin, 2, 120 -9, "%d", score);
+
 }
 
 //movement
@@ -70,12 +79,22 @@ int Player::getRackIDByLoc(int y, int x){
 }
 
 
+
 Product Player::trigger(int y, int x){
 	int current = getRackIDByLoc(y, x);
 
 	if(!current){
+		if(y >= counter.getLocation('y') && x >= counter.getLocation('x') && y <= counter.getLocation('y') + counter.getSize('y') && x <= counter.getLocation('x') + counter.getSize('x')){
+			if(counter.checkItem(inventory)){
+				score++;
+				mvwprintw(curwin, 2, 120 -9, "%s", "      ");
+				mvwprintw(curwin, 2, 120 -9, "%d", score);
+				counter.removeOrder(inventory);
+			}
+		}
 		inventory = "";
 		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
+		mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
 		wrefresh(curwin);
 	}else{
 		Rack curRack = returnRackByID(current);
@@ -84,18 +103,18 @@ Product Player::trigger(int y, int x){
 	return n;
 }
 
-Product Player::checkBlock(int y, int x, char c){
+Product Player::checkBlock(int y, int x, char c, char c2){
 	char cUp = mvwinch(curwin, y-1, x);
 	char cRight = mvwinch(curwin, y, x+1);
 	char cDown = mvwinch(curwin, y+1, x);
 	char cLeft = mvwinch(curwin, y, x-1);
-	if(cUp == c)
+	if(cUp == c || cUp == c2)
 		return trigger(y-1, x);
-	else if(cRight == c)
+	else if(cRight == c || cRight == c2)
 		return trigger(y, x+1);
-	else if(cDown == c)
+	else if(cDown == c || cDown == c2)
 		return trigger(y+1, x);
-	else if(cLeft == c)
+	else if(cLeft == c || cLeft == c2)
 		return trigger(y, x-1);
 	else{
 		return n;
@@ -120,9 +139,8 @@ int Player::getmv(){
 			mvRight();
 			break;
 		case 10: //Enter
-			n = checkBlock(yLoc, xLoc, '|').getName();
+			n = checkBlock(yLoc, xLoc, '|', '*').getName();
 			if(n != "") addItem(n);
-			checkBlock(yLoc, xLoc, '-').getName();
 			break;
 		default:
 			break;
@@ -144,16 +162,14 @@ int Player::getPos(char p){
 bool Player::addItem(string item){
 	if(inventory == ""){
 		inventory = item;
+		mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
 		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
 		wrefresh(curwin);
 		mvwprintw(curwin, yMax-6, xMax-11, inventory.c_str());
 		return true;
 	}
 	else{
-		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
-		wrefresh(curwin);
-		mvwprintw(curwin, yMax-6, xMax-11, "%s", "FULL");
-		//wrefresh(curwin);
+		mvwprintw(curwin, yMax-6, xMax-16, "%s", "FULL");
 		return false;
 	}
 }
