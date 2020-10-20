@@ -11,7 +11,7 @@
 using namespace std;
 
 //initialize
-Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r, Counter cc, Bin bb){
+Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r, Counter cc, Bin bb, bool *game){
 	curwin = win;
 	yLoc = y;
 	xLoc = x;
@@ -24,7 +24,7 @@ Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r, Count
 	score = 0;
 	mvwprintw(curwin, 2, 120 -11-4, "%s", "Score:");
 	mvwprintw(curwin, 2, 120 -9, "%d", score);
-
+	curGame = game;
 }
 
 //movement
@@ -90,12 +90,20 @@ Product Player::trigger(int y, int x){
 				mvwprintw(curwin, 2, 120 -9, "%s", "      ");
 				mvwprintw(curwin, 2, 120 -9, "%d", score);
 				counter.removeOrder(inventory);
+				inventory = "";
+				mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
+				mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
+				if(score == 3) {
+					win();
+					wrefresh(curwin);
+					*curGame = false;
+				}
 			}
+		}else if(y >= bin.getLocation('y') && x >= bin.getLocation('x') && y <= bin.getLocation('y') + bin.getSize('y') && x <= bin.getLocation('x') + bin.getSize('x')){
+			inventory = "";
+			mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
+			mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
 		}
-		inventory = "";
-		mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
-		mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
-		wrefresh(curwin);
 	}else{
 		Rack curRack = returnRackByID(current);
 		return getProductByRack(y, &curRack);
@@ -103,22 +111,19 @@ Product Player::trigger(int y, int x){
 	return n;
 }
 
-Product Player::checkBlock(int y, int x, char c, char c2){
+Product Player::checkBlock(int y, int x){
 	char cUp = mvwinch(curwin, y-1, x);
 	char cRight = mvwinch(curwin, y, x+1);
 	char cDown = mvwinch(curwin, y+1, x);
 	char cLeft = mvwinch(curwin, y, x-1);
-	if(cUp == c || cUp == c2)
-		return trigger(y-1, x);
-	else if(cRight == c || cRight == c2)
-		return trigger(y, x+1);
-	else if(cDown == c || cDown == c2)
-		return trigger(y+1, x);
-	else if(cLeft == c || cLeft == c2)
-		return trigger(y, x-1);
-	else{
-		return n;
+	char c[] = {'|', '*', '-'};
+	for(int i = 0; i < sizeof(c)/sizeof(c[0]); i++){
+		if(cUp == c[i]) return trigger(y-1, x);
+		else if(cRight == c[i]) return trigger(y, x+1);
+		else if(cDown == c[i]) return trigger(y+1, x);
+		else if(cLeft == c[i]) return trigger(y, x-1);
 	}
+	return n;
 }
 
 int Player::getmv(){
@@ -138,8 +143,8 @@ int Player::getmv(){
 		case KEY_RIGHT:
 			mvRight();
 			break;
-		case 10: //Enter
-			n = checkBlock(yLoc, xLoc, '|', '*').getName();
+		case 'z': //Enter
+			n = checkBlock(yLoc, xLoc).getName();
 			if(n != "") addItem(n);
 			break;
 		default:
@@ -176,6 +181,26 @@ bool Player::addItem(string item){
 
 string Player::getInventory(){
 	return inventory;
+}
+
+void Player::win(){
+	int starty = yLoc-1, startx = xLoc-3;
+	int endy = yLoc+3, endx = xLoc+3;
+	for(int i = 0; i < endx; i++){
+		for(int j = 0; j < endy; j++){
+			mvwaddch(curwin, i, j, ' ');
+			if(i == 0 || j == 0 || i == endx-1 || j == endy-1){
+				mvwaddch(curwin, i, j, '*');
+			}
+			else if(i == yLoc+1 && j == xLoc-1){
+				mvwprintw(curwin, i, j, "%s", "You");
+				j+=2;
+			}else if(i == yLoc+2 && j == xLoc-1){
+				mvwprintw(curwin, i, j, "%s", "Win");
+				j+=2;
+			}
+		}
+	}
 }
 
 Player::~Player(){

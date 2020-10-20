@@ -9,6 +9,7 @@ map:
 	g++ -c menu.cpp
 	g++ -c map.cpp
 	g++ -o main Terminal.o Player.o Product.o Block.o Rack.o Bin.o Counter.o menu.o map.o -lncurses
+	make clean
 	
 test: Terminal.h Terminal.cpp test.cpp
 	g++ -o test Terminal.h Terminal.cpp test.cpp -lncurses
@@ -17,3 +18,6 @@ test2: Terminal.h Terminal.cpp Player.h Player.cpp Product.h Product.cpp Block.h
 	g++ -o test Terminal.h Terminal.cpp Player.h Player.cpp Product.h Product.cpp Block.h Block.cpp Rack.h Rack.cpp test2.cpp -lncurses
 	./test
 	clear
+
+clean: 
+	rm Terminal.o Player.o Product.o Block.o Rack.o Bin.o Counter.o menu.o map.o Terminal.h.gch Player.h.gch Product.h.gch Block.h.gch Rack.h.gch Bin.h.gch Counter.h.gch
