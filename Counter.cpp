@@ -69,4 +69,5 @@ void Counter::removeOrder(string s){
 			return;
 		}
 	}
+	addOrder();
 }

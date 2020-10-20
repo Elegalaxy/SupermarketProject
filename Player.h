@@ -21,9 +21,10 @@ class Player{
 		Bin bin;
 		Product n;
 		int score;
+		bool *curGame;
 		
 	public:
-		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r, Counter cc, Bin bb); //initialize
+		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r, Counter cc, Bin bb, bool *game); //initialize
 		//movement
 		void mvUp();
 		void mvDown();
@@ -38,12 +39,12 @@ class Player{
 		bool addItem(std::string item); //add item
 		std::string getInventory(); //return item
 		
-		Product checkBlock(int y, int x, char c, char c2);
+		Product checkBlock(int y, int x);
 		Product trigger(int y, int x);
 		int getRackIDByLoc(int y, int x);
 		Product getProductByRack(int y, Rack* r);
 		Rack returnRackByID(int ID);
-
+		void win();
 		~Player();
 };
 #endif

@@ -83,3 +83,11 @@ LOG FILE
 	- Shows score
 - Map
 	- Add score while player put correct item in counter
+	
+20/10/2020
+- Player
+	- Fix player item bug when wrong item input into counter
+	- Game end while condition met
+	- Working on game ending interface
+- Map
+	- Created a bool to check if game is finish or not

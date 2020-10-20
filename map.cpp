@@ -1,12 +1,16 @@
 #include <ncurses.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <unistd.h>
 #include "Terminal.h"
 #include "Player.h"
 #include "Product.h"
 #include "Rack.h"
 #include "Bin.h"
 #include "Counter.h"
+#include <unistd.h>
+
 using namespace std;
 
 extern bool menu();
@@ -22,6 +26,8 @@ int main(){
 	int yMax = 30, xMax = 120;
 	//getmaxyx(stdscr, yMax, xMax);//30 120
 	WINDOW * map = terminal.createWin(yMax-2, xMax-2, 1, 1);
+	bool game = true;
+
 	//define racks size and start point
 	const int rackY = 10;
 	const int rackX = 12;
@@ -36,7 +42,7 @@ int main(){
 	products.push_back(p1);
 	Product p2("Vegetable");
 	products.push_back(p2);
-	Product p3("Bear");
+	Product p3("Beer");
 	products.push_back(p3);
 	Product p4("Beef");
 	products.push_back(p4);
@@ -95,10 +101,11 @@ int main(){
 	Bin *bin = new Bin(map, 3, 5, yMax-6, xMax-10);
 	
 	//player
-	Player * p = new Player(map, yMax-7, 4, '@', rackList, *counter, *bin);
+	Player * p = new Player(map, yMax-7, 4, '@', rackList, *counter, *bin, &game);
 	do {
 		p->display();
 		wrefresh(map);
-	}while(p->getmv() != 'x');
+	}while(p->getmv() && game == true);
+	sleep(3);
 	return 0;
 }
