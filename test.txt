@@ -64,7 +64,7 @@ HotPotPork
 BellyBites
 Chicken
 Breast
-ChickenWing
+ChickWing
 Stick
 Nugguts
 Egg

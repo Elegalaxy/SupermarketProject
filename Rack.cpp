@@ -12,7 +12,7 @@ Rack::Rack(): Block(name){
 	name = "";
 }
 
-Rack::Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> p): Block(name, win, yy, xx, yyStart, xxStart, '=', '|'){
+Rack::Rack(WINDOW * win, int yy, int xx, int yyStart, int xxStart, vector<Product> *p): Block(name, win, yy, xx, yyStart, xxStart, '=', '|'){
 	currentID = rackID;
 	rackID++;
 	name = "Rack";
@@ -25,17 +25,17 @@ int Rack::getID(){
 }
 
 Product Rack::getProductByY(int y){
-	return items[y];
+	return (*items)[y];
 }
 
 void Rack::showProduct(){
-	for(int i = 0; i < items.size(); i++){
-		mvwprintw(curWin, yStart+i+1, xStart+1, items[i].getName().c_str());
+	for(int i = 0; i < (*items).size(); i++){
+		mvwprintw(curWin, yStart+i+1, xStart+1, (*items)[i].getName().c_str());
 	}
 }
 
 vector<Product> Rack::getProductList(){
-	return items;
+	return *items;
 }
 
 Rack::~Rack(){

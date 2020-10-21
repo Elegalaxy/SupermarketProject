@@ -8,7 +8,7 @@ map:
 	g++ -c Counter.h Counter.cpp
 	g++ -c menu.cpp
 	g++ -c map.cpp
-	g++ -o main Terminal.o Player.o Product.o Block.o Rack.o Bin.o Counter.o menu.o map.o -lncurses
+	g++ -Wall -o main Terminal.o Player.o Product.o Block.o Rack.o Bin.o Counter.o menu.o map.o -lncurses
 	make clean
 	
 test: Terminal.h Terminal.cpp test.cpp

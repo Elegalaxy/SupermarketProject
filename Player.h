@@ -16,7 +16,7 @@ class Player{
 		WINDOW * curwin;
 		std::string inventory = "";
 		void checkBlock();
-		std::vector<std::vector<Rack>> rack;
+		std::vector<std::vector<Rack>> *rack;
 		Counter counter;
 		Bin bin;
 		Product n;
@@ -24,7 +24,7 @@ class Player{
 		bool *curGame;
 		
 	public:
-		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> r, Counter cc, Bin bb, bool *game); //initialize
+		Player(WINDOW * win, int y, int x, char c, std::vector<std::vector<Rack>> *r, Counter cc, Bin bb, bool *game); //initialize
 		//movement
 		void mvUp();
 		void mvDown();
@@ -44,6 +44,7 @@ class Player{
 		int getRackIDByLoc(int y, int x);
 		Product getProductByRack(int y, Rack* r);
 		Rack returnRackByID(int ID);
+		void updateScore();
 		void win();
 		~Player();
 };

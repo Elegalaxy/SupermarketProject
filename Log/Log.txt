@@ -91,3 +91,8 @@ LOG FILE
 	- Working on game ending interface
 - Map
 	- Created a bool to check if game is finish or not
+
+21/10/2020
+- Memory overload on stack
+- Rack
+	- Product implementation doesn't work properly

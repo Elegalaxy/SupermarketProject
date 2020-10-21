@@ -7,6 +7,6 @@ class Bin: public Block{
 	public:
 		Bin();
 		Bin(WINDOW * win, int yy, int xx, int yyStart, int xxStart); //initialize
-
+		~Bin();
 };
 #endif
