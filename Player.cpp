@@ -184,18 +184,18 @@ string Player::getInventory(){
 }
 
 void Player::win(){
-	int starty = yLoc-1, startx = xLoc-3;
-	int endy = yLoc+3, endx = xLoc+3;
-	for(int i = 0; i < endx; i++){
-		for(int j = 0; j < endy; j++){
+	int starty = 11, startx = 53;
+	int endy = 16, endx = 67;
+	for(int i = starty; i <= endy; i++){
+		for(int j = startx; j <= endx; j++){
 			mvwaddch(curwin, i, j, ' ');
-			if(i == 0 || j == 0 || i == endx-1 || j == endy-1){
+			if(i == starty || j == startx || i == endy || j == endx){
 				mvwaddch(curwin, i, j, '*');
 			}
-			else if(i == yLoc+1 && j == xLoc-1){
+			else if(i == starty+2 && j == (startx+endx)/2-1){
 				mvwprintw(curwin, i, j, "%s", "You");
 				j+=2;
-			}else if(i == yLoc+2 && j == xLoc-1){
+			}else if(i == starty+3 && j == (startx+endx)/2-1){
 				mvwprintw(curwin, i, j, "%s", "Win");
 				j+=2;
 			}

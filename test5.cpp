@@ -3,6 +3,7 @@ using namespace std;
 
 int main()
 {
+	int 
 	int starty = yLoc-1, startx = xLoc-3;
 	int endy = yLoc+3, endx = xLoc+3;
 	for(int i = 0; i < endx; i++){
