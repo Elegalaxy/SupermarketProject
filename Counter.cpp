@@ -55,7 +55,7 @@ bool Counter::checkItem(string item){
 
 void Counter::addOrder(){
 	if(require.size() < 5){
-		int i = rand()%products.size(), j = rand()%products[0].size();
+		int i = rand()%products.size(), j = rand()%products[i].size();
 		require.push_back(products[i][j]);
 	}
 	mvwprintw(curWin, yWord, xWord, require[require.size()-1].getName().c_str());
