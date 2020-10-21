@@ -9,13 +9,13 @@
 
 class Counter: public Block{
 	private:
-		std::vector<Product> require;
+		std::vector<Product> *require;
 		std::vector<std::vector<Product>> products;
-		std::vector<Product> temp;
+		std::vector<Product>temp;
 		int yWord, xWord;
 	public:
 		Counter();
-		Counter(WINDOW * win, int yy, int xx, int yyStart, int xxStart, std::vector<std::vector<Rack>> Rs); //initialize
+		Counter(WINDOW * win, int yy, int xx, int yyStart, int xxStart, std::vector<std::vector<Rack>> *Rs); //initialize
 		void drawBox(WINDOW * curWin, int y, int x, int yStart, int xStart, char horr, char verr);
 		bool checkItem(std::string item);
 		void addOrder();

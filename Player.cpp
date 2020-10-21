@@ -11,7 +11,7 @@
 using namespace std;
 
 //initialize
-Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> r, Counter cc, Bin bb, bool *game){
+Player::Player(WINDOW * win, int y, int x, char c, vector<vector<Rack>> *r, Counter cc, Bin bb, bool *game){
 	curwin = win;
 	yLoc = y;
 	xLoc = x;
@@ -55,9 +55,9 @@ Product Player::getProductByRack(int y, Rack* r){
 }
 
 Rack Player::returnRackByID(int ID){
-	for(int i = 0; i < rack.size(); i++){
-		for(int j = 0; j < rack[i].size(); j++){
-			if(rack[i][j].getID() == ID) return rack[i][j];
+	for(int i = 0; i < rack->size(); i++){
+		for(int j = 0; j < (*rack)[i].size(); j++){
+			if((*rack)[i][j].getID() == ID) return (*rack)[i][j];
 		}
 	}
 	Rack n;
@@ -66,19 +66,22 @@ Rack Player::returnRackByID(int ID){
 
 int Player::getRackIDByLoc(int y, int x){
 	int yStart, xStart, yEnd, xEnd;
-	for(int i = 0; i < rack.size(); i++){
-		for(int j = 0; j < rack[i].size(); j+=2){
-			yStart = rack[i][j].getLocation('y');
-			xStart = rack[i][j].getLocation('x');
-			yEnd = yStart + rack[i][j].getSize('y')-1;
-			xEnd = xStart + rack[i][j].getSize('x') + rack[i][j+1].getSize('x');
-			if(y >= yStart && y <= yEnd && x >= xStart && x <= xEnd) return rack[i][j].getID();
+	for(int i = 0; i < rack->size(); i++){
+		for(int j = 0; j < (*rack)[i].size(); j++){
+			yStart = (*rack)[i][j].getLocation('y');
+			xStart = (*rack)[i][j].getLocation('x');
+			yEnd = yStart + (*rack)[i][j].getSize('y')-1;
+			xEnd = xStart + (*rack)[i][j].getSize('x');
+			if(y >= yStart && y <= yEnd && x >= xStart && x <= xEnd) return (*rack)[i][j].getID();
 		}
 	}
 	return 0;
 }
 
-
+void Player::updateScore(){
+	mvwprintw(curwin, 2, 120 -9, "%s", "      ");
+	mvwprintw(curwin, 2, 120 -9, "%d", score);
+}
 
 Product Player::trigger(int y, int x){
 	int current = getRackIDByLoc(y, x);
@@ -87,13 +90,12 @@ Product Player::trigger(int y, int x){
 		if(y >= counter.getLocation('y') && x >= counter.getLocation('x') && y <= counter.getLocation('y') + counter.getSize('y') && x <= counter.getLocation('x') + counter.getSize('x')){
 			if(counter.checkItem(inventory)){
 				score++;
-				mvwprintw(curwin, 2, 120 -9, "%s", "      ");
-				mvwprintw(curwin, 2, 120 -9, "%d", score);
+				updateScore();
 				counter.removeOrder(inventory);
 				inventory = "";
 				mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
 				mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
-				if(score == 3) {
+				if(score == 2) {
 					win();
 					wrefresh(curwin);
 					*curGame = false;
@@ -103,6 +105,8 @@ Product Player::trigger(int y, int x){
 			inventory = "";
 			mvwprintw(curwin, yMax-6, xMax-11, "%s", "          ");
 			mvwprintw(curwin, yMax-6, xMax-16, "%s", "    ");
+			score--;
+			updateScore();
 		}
 	}else{
 		Rack curRack = returnRackByID(current);

@@ -10,3 +10,7 @@ Bin::Bin(WINDOW * win, int yy, int xx, int yyStart, int xxStart): Block(name, wi
 	name = "Bin";
 	mvwprintw(curWin, yStart+1, xStart+1, name.c_str());
 }
+
+Bin::~Bin(){
+	
+}
