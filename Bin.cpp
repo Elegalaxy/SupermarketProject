@@ -7,7 +7,7 @@ Bin::Bin(): Block(name){
 }
 
 Bin::Bin(WINDOW * win, int yy, int xx, int yyStart, int xxStart): Block(name, win, yy, xx, yyStart, xxStart, '-', '|'){
-	name = "Bin";
+	name = "Bin"; //Name
 	mvwprintw(curWin, yStart+1, xStart+1, name.c_str());
 }
 
