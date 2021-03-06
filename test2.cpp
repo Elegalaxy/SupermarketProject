@@ -7,6 +7,7 @@
 #include <string>
 using namespace std;
 
+//just for testing the location
 int main(){
 	Terminal terminal;
 	WINDOW * map = terminal.createWin(20, 20, 1, 1);
