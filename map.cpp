@@ -50,24 +50,6 @@ int main(){
 	}
 
 	fin.close();
-
-	/*vector<Product> testProducts;
-	Product p1("Food1");
-	Product p2("Food2");
-	Product p3("Food3");
-	Product p4("Food4");
-	Product p5("Food5");
-	Product p6("Food6");
-	Product p7("Food7");
-	Product p8("Food8");
-	testProducts.push_back(p1);
-	testProducts.push_back(p2);
-	testProducts.push_back(p3);
-	testProducts.push_back(p4);
-	testProducts.push_back(p5);
-	testProducts.push_back(p6);
-	testProducts.push_back(p7);
-	testProducts.push_back(p8);*/
 	
 	//racks1	
 	Rack *rack11 = new Rack(map, rackY, rackX, startY, startX, /*testProducts);*/&(*products)[0]);
